@@ -13,9 +13,14 @@ jobs:
     - uses: actions/checkout@v4
     - name: Install dependencies
       run: sudo apt-get update && sudo apt-get install -y g++ libssl-dev
-    - name: Compile with BN_are_coprime stub
+    - name: Create stub header and source
       run: |
+        echo '#ifndef BN_STUB_H' > bn_stub.h
+        echo '#define BN_STUB_H' >> bn_stub.h
+        echo 'extern "C" { int BN_are_coprime(const void *a, const void *b, void *ctx); }' >> bn_stub.h
+        echo '#endif' >> bn_stub.h
         echo 'int BN_are_coprime(const void *a, const void *b, void *ctx) { return 1; }' > bn_stub.c
-        g++ -std=c++98 -Wall -Wextra -o program *.cpp bn_stub.c -lssl -lcrypto
+    - name: Compile
+      run: g++ -std=c++98 -Wall -Wextra -include bn_stub.h -o program *.cpp bn_stub.c -lssl -lcrypto
     - name: Run (optional)
       run: ./program || true
