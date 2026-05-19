@@ -1,0 +1,17 @@
+# Compiled
+program
+*.o
+*.exe
+
+# Build directories
+build/
+build-*/
+cmake-build-*/
+
+# IDE
+.vscode/
+.idea/
+
+# Local
+temp/
+*.tmp
