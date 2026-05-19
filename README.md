@@ -1,25 +1,25 @@
-﻿# elgamal-cpp
+# elgamal-cpp
 
 ElGamal asymmetric encryption implemented from scratch in C++98.
 Built on top of the BigNum class from rsa-cpp, using OpenSSL BIGNUM internally.
 
 ## What's implemented
 
-- ElGamal class:
-  - genpkey() — generate key pair: prime p, generator g, private key x, public key y = g^x mod p
-  - encrypt(msg) — returns ciphertext pair (c1, c2)
-  - decrypt(ciphertext) — recover original message via c2 * c1^(-x) mod p
-  - 	ext2bn / n2text — text <-> BigNum conversion
+- `ElGamal` class:
+  - `genpkey()` — generate key pair: prime p, generator g, private key x, public key y = g^x mod p
+  - `encrypt(msg)` — returns ciphertext pair (c1, c2)
+  - `decrypt(ciphertext)` — recover original message via c2 * c1^(-x) mod p
+  - `text2bn` / `bn2text` — text <-> BigNum conversion
 
-- Structs EGKeyPair and EGCiphertext with stream operators
+- Structs `EGKeyPair` and `EGCiphertext` with stream operators
 
 ## Build
 
-`ash
+```bash
 make
-`
+```
 
-Requires: GCC, OpenSSL (-lcrypto)
+Requires: GCC, OpenSSL (`-lcrypto`)
 
 ## Stack
 
